@@ -1,0 +1,35 @@
+---
+title: "Assignment"
+author: "Richel Anne Sumalde"
+date: "2026-09-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+ASSIGNMENT
+1. git add and git commit are two main steps in Git that work together to save your project updates. First, git add picks the specific files you changed and puts them into a temporary holding space called the staging area. Next, git commit takes everything in that holding space and saves it permanently into your project history with a short message describing your changes. Using both steps is important because it lets you pick and choose which changes belong together before making a permanent save, keeping your project history clean and easy to follow.
+
+2. The classmate's statement is incorrect because deleting a file directly on GitHub only updates the remote repository, leaving your local workspace unchanged until you manually synchronize it. To bring those remote changes to your computer and update your local copy, you use the git pull command, which fetches the deletion from GitHub and merges it into your local directory.
