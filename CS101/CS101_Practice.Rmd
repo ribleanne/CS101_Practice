@@ -1,0 +1,22 @@
+---
+title: "Assignment"
+author: "Richel Anne Sumalde"
+date: "2026-09-17"
+output: html_document
+---
+
+```{r}
+ Question1 <- "Explain the difference between git add and git commit in your own words. Why are both steps necessary?"
+
+ Answer1 <- "git add and git commit are two main steps in Git that work together to save your project updates. First, git add picks the specific files you changed and puts them into a temporary holding space called the staging area. Next, git commit takes everything in that holding space and saves it permanently into your project history with a short message describing your changes. Using both steps is important because it lets you pick and choose which changes belong together before making a permanent save, keeping your project history clean and easy to follow."
+ 
+ Question2 <- "A classmate says: 'If i delete a commited file from Github, my local copy will also be deleted.' Is this correct? what command would update the local copy?"
+ 
+ Answer2 <- "The classmate's statement is incorrect because deleting a file directly on GitHub only updates the remote repository, leaving your local workspace unchanged until you manually synchronize it. To bring those remote changes to your computer and update your local copy, you use the git pull command, which fetches the deletion from GitHub and merges it into your local directory."
+ 
+ print(Question1)
+ print(Answer1)
+ print(Question2)
+ print(Answer2)
+```
+
