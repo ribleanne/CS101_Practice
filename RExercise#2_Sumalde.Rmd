@@ -1,0 +1,147 @@
+---
+title: 'R Lab: Arithmetic Operations'
+author: "Richel Sumalde"
+date: "2026-09-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Part A: Arithmetic Operations
+```{r}
+a <- 17
+b <- 5
+
+sum <- a + b
+sum
+diff <- a - b
+diff
+mult <- a * b
+mult
+quot <- a / b
+quot
+
+rem <- a %% b
+rem
+
+intgr <- a %/% b
+intgr
+
+pow <- 2^10
+pow
+
+17 / 5
+17 %% 5
+17 %/% 5
+```
+Question #1: Run 17 / 5, 17 %% 5, and 17 %/% 5 side by side. In your own words, explain how these three results relate to each other mathematically.
+
+Answer #1: These three relate to each other in terms of their operators, three of them used standard arithmetic operators such as division, modulus (reminder), and integer division. However, they differ from there results, modulus comes from the reminder and the integer division comes from the result itself (whole number), while the division can return results with decimal.
+
+Question #2: Predict the output of 10 %% 3 and 10 %/% 3 before running the code. Were you correct? If not, explain what you misunderstood.
+
+Answer #2: I correctly predict the output of 10 %% 3 and 10 %/% 3 by just looking at its operator.
+
+
+## Part B - Basic Data Types
+```{r}
+
+x <- 42
+typeof(x)
+y <- 42L
+typeof(y)
+z <- "42"
+typeof(z)
+w <- TRUE
+typeof(w)
+v <- 3 + 2i
+typeof(v)
+
+class(x)
+class(y)
+class(z)
+class(w)
+class(v)
+
+mode(x)
+mode(y)
+mode(z)
+mode(w)
+mode(v)
+```
+Question #3): x <- 42 and y <- 42L look almost identical, but typeof(x) and typeof(y) give different answers. Explain the difference in your own words.
+
+Answer #3: It is true that x <- 42 and y <- 42L look almost identical but differ in terms of typeof() because "L" in y <- 42L specifies integer (whole number without decimal places), x <- 42 is a type of double/float (number with decimal places).
+
+Question #4: Is typeof() ever different from class() and from mode() for the same object? Look at your results above and explain any case where this happens (or, if you did not see one, explain what you would expect for a matrix or factor).
+
+Answer #4: They differ from each other for the same object.
+
+
+## Part C - Type Conversion
+```{r}
+
+num_string <- "123"
+as.numeric(num_string)
+typeof(num_string)
+class(num_string)
+mode(num_string)
+
+num <- c(0,1)
+as.logical(num)
+
+bad_string <- "hello123"
+as.numeric(bad_string)
+as.logical(2)
+as.logical (-1)
+```
+Question #5: When you ran the conversion-fail chunk, R produced NA and a warning instead of stopping with an error.
+
+## Why do you think R is designed to give a warning here rather than crashing the whole script?
+
+To be able to retain the code because NA represents missing value data that should be there but is not.
+
+## What are the risks of this behavior if you don’t read your warnings?
+
+You will not be able to fix your code or your code will be incorrect.
+
+Question #6: as.logical(0) and as.logical(1) convert to FALSE and TRUE.
+
+## What do you think as.logical(2) and as.logical(-1)` will produce?
+
+It produce TRUE output for both as.logical.
+
+## Part D _ Strings
+```{r}
+first_name <- "Juan"
+last_name <- "Dela Cruz"
+
+cat(first_name, last_name)
+paste(first_name, last_name)
+paste0(first_name, last_name)
+
+full_name <- paste(first_name,"-",last_name)
+full_name
+age <- 21
+paste0(fullname, "is", age, "years old.")
+```
+Question #7: paste() and paste0() produced different results for the same two strings. Explain exactly why, referencing what each function does by default.
+
+They produce different results for the same two strings because paste() combines character strings with a blank space
+paste0() combines character strings without a blank space.
+
+Question #8: In the strings-numbers chunk, you combined a character string with a numeric variable (age) using paste0() without first converting age to a string.
+
+## Did this cause an error? Explain what paste0() does internally to make this work, and how it relates to the type conversions you practiced in Part C.
+
+It did not make an error, paste0() concatenates strings without spaces.
+
+
+
+## Part E — Critical Thinking Challenge
+```{r}
+
+
+```
