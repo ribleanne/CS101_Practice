@@ -543,19 +543,17 @@ inventory</code></pre>
 ## $in_stock
 ## [1]  TRUE  TRUE FALSE</code></pre>
 <p>#Question 12</p>
-</div>
-<div id="in-challenge-1-you-combined-logical-indexing-on-one-vector-in_stock-to-filter-a-different-vector-item-inside-the-same-list.-explain-step-by-step-why-inventoryiteminventoryin_stock-works-even-though-item-and-in_stock-are-stored-as-separate-elements-of-the-list." class="section level1">
-<h1>In challenge-1, you combined logical indexing on one vector
+<p>In challenge-1, you combined logical indexing on one vector
 (in_stock) to filter a different vector (item) inside the same list.
 Explain, step by step, why inventory<span class="math inline">\(item[inventory\)</span>in_stock] works even though
-item and in_stock are stored as separate elements of the list.</h1>
+item and in_stock are stored as separate elements of the list.</p>
 <p>R evaluates the logical vector expression inside the brackets. Next,
 it uses positional logical subsetting keeping only the elements where
 the index corresponds to TRUE. Even though they are stored as separate
 vectors inside the list, referencing them together allows R to evaluate
 vector operations</p>
 <p>#Question 13</p>
-<p>#Suppose a classmate stores related data as three separate,
+<p>Suppose a classmate stores related data as three separate,
 unconnected vectors (item_names, item_prices, item_stock) instead of
 grouping them into one list like inventory. What risks or bugs could
 this create as the dataset grows or gets reordered? Argue for or against
