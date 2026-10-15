@@ -210,4 +210,4 @@ Suppose a classmate stores related data as three separate, unconnected vectors (
   
 
 #CONCLUSION
-  Lists are flexible, capable of holding elements of different types and lengths, whereas vectors are strictly store elements of a single data type. You choose a vector when performing mathematical or logical operations. You choose a list when you need to group distinct, multi-type data objects together into a single structure.
+  Lists are flexible, capable of holding elements of different types and lengths, whereas vectors are strictly store elements of a single data type. You choose a vector when performing mathematical or logical operations. You choose a list when you need to group distinct, multi-type data objects together into a single structure.       
