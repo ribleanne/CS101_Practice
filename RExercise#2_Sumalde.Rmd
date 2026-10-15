@@ -36,11 +36,11 @@ pow
 17 %% 5
 17 %/% 5
 ```
-Question #1: Run 17 / 5, 17 %% 5, and 17 %/% 5 side by side. In your own words, explain how these three results relate to each other mathematically.
+#Question #1: Run 17 / 5, 17 %% 5, and 17 %/% 5 side by side. In your own words, explain how these three results relate to each other mathematically.
 
 Answer #1: These three relate to each other in terms of their operators, three of them used standard arithmetic operators such as division, modulus (reminder), and integer division. However, they differ from there results, modulus comes from the reminder and the integer division comes from the result itself (whole number), while the division can return results with decimal.
 
-Question #2: Predict the output of 10 %% 3 and 10 %/% 3 before running the code. Were you correct? If not, explain what you misunderstood.
+#Question #2: Predict the output of 10 %% 3 and 10 %/% 3 before running the code. Were you correct? If not, explain what you misunderstood.
 
 Answer #2: I correctly predict the output of 10 %% 3 and 10 %/% 3 by just looking at its operator.
 
@@ -71,13 +71,15 @@ mode(z)
 mode(w)
 mode(v)
 ```
-Question #3): x <- 42 and y <- 42L look almost identical, but typeof(x) and typeof(y) give different answers. Explain the difference in your own words.
+#Question #3): x <- 42 and y <- 42L look almost identical, but typeof(x) and typeof(y) give different answers. Explain the difference in your own words.
 
 Answer #3: It is true that x <- 42 and y <- 42L look almost identical but differ in terms of typeof() because "L" in y <- 42L specifies integer (whole number without decimal places), x <- 42 is a type of double/float (number with decimal places).
 
-Question #4: Is typeof() ever different from class() and from mode() for the same object? Look at your results above and explain any case where this happens (or, if you did not see one, explain what you would expect for a matrix or factor).
+#Question #4: Is typeof() ever different from class() and from mode() for the same object? Look at your results above and explain any case where this happens (or, if you did not see one, explain what you would expect for a matrix or factor).
 
-Answer #4: They differ from each other for the same object.
+Answer #4: They differ from each other because they describe different object, typeof() returns integer, class() returns factor, and mode() returns numeric.
+
+
 
 
 ## Part C - Type Conversion
@@ -125,7 +127,7 @@ paste0(first_name, last_name)
 full_name <- paste(first_name,"-",last_name)
 full_name
 age <- 21
-paste0(fullname, "is", age, "years old.")
+paste0(full_name, "is", age, "years old.")
 ```
 Question #7: paste() and paste0() produced different results for the same two strings. Explain exactly why, referencing what each function does by default.
 
@@ -143,5 +145,22 @@ It did not make an error, paste0() concatenates strings without spaces.
 ## Part E — Critical Thinking Challenge
 ```{r}
 
+as.numeric("5") + 5
+
+
 
 ```
+
+#Question #9: Some programming languages automatically convert "5" + 5 into 10 without an error. R does not.
+#Based on what you’ve learned about R’s data types in this lab, why do you think R requires an explicit conversion instead of guessing what the programmer meant?
+
+  R enforces strict explicit typing to prevent code interpretation; guessing what a programmer intended could hide bugs or lead to unpredictable calculation errors in complex scripts.  
+  
+
+#Question #10: Suppose a classmate writes a script that reads a column of “numbers” from a text file. The column looks numeric, but when they try sum() on it, R throws an error. Based on everything in this lab (types, typeof()/class()/mode(), conversion, warnings), write a short paragraph explaining what likely went wrong and the steps you’d take to diagnose and fix it.
+
+  The column was likely imported as a character or factor type rather than numeric, causing sum() to fail. Inspect typeof(), class(), or mode(), and fix it by converting the column using as.numeric() after cleaning any formatting issues.  
+  
+
+#Conclusion
+  R relies heavily on explicit data typing, requiring programmers to understand functions like typeof() and class() before performing mathematical operations. Using correct conversion functions prevents unexpected c warnings, NA introductions, and invalid arithmetic errors. Proper type management ensures data integrity across scripts and integration into workflows before pushing code.
