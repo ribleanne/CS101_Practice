@@ -1,0 +1,96 @@
+---
+title: 'R Lab: Basic Operations of R Programming'
+author: "Richel Anne Sumalde"
+date: "2026-11-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+shoe_size <- c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5, 10.5, 8.5, 12.0, 10.5,
+               13.0, 11.5, 8.5, 5.0, 10.0, 6.5, 7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0, 13.0)
+height <- c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0, 74.5, 67.0, 71.0, 71.0,
+            77.0, 72.0, 59.0, 62.0, 72.0, 66.0, 64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0)
+gender <- c("F", "F", "F", "F", "M", "F", "F", "F", "M", "F", "M", "F", "M", "M",
+            "M", "M", "F", "F", "M", "F", "F", "M", "M", "F", "M", "M", "M", "M")
+
+
+shoes <- data.frame(ShoeSize = shoe_size, Height = height, Gender = gender)
+
+
+write.csv(shoes, "shoesize.csv", row.names = FALSE)
+
+shoes <- read.csv("shoesize.csv")
+tail(shoes, 5)
+
+str(shoes)
+head(shoes)
+
+nrow(shoes)
+ncol(shoes)
+
+summary(shoes)
+
+males_subset <- subset(shoes, Gender == "M")
+print("Males Subset:")
+print(males_subset)
+
+females_subset <- subset(shoes, Gender == "F")
+print("Females Subset:")
+print(females_subset)
+
+mean_shoe_size <- mean(shoes$ShoeSize)
+mean_height <- mean(shoes$Height)
+
+mean_shoe_size
+mean_height
+
+shoes$Gender <- as.factor(shoes$Gender)
+
+str(shoes)
+
+cor(shoes$ShoeSize, shoes$Height)
+
+subset(shoes, ShoeSize >= 11)
+
+aggregate(cbind(ShoeSize, Height) ~ Gender, data = shoes, FUN = mean)
+
+
+```
+
+**ANSWERS**
+
+**Question 1:** 
+
+d. Result for nrow and ncol: There are 28 rows and 3 columns.
+
+e. str() displays the internal structure of an R object, showing the data type of each column, length, and a preview of the first few values. In contrast, summary() provides descriptive statistical summaries for each column and quartiles for numeric columns, and frequency counts for character/categorical columns.
+
+g. Result for mean and height: 
+​Mean Shoe Size: 9.25
+​Mean Height: 68.55
+
+h. Yes, there is generally a positive relationship between shoe size and height. Taller individuals tend to have larger feet to support a larger body frame, which is reflected in biometric data where height and foot/shoe dimensions scale proportionally.  
+
+
+**Question 3:** 
+
+Setting the .Rmd file's directory as the working directory ensures that relative file paths resolve correctly regardless of what machine or folder structure another user runs the script from. It prevents errors caused by absolute paths tied to a specific user's local directory.
+
+**Question 4:** 
+
+Character strings are often imported as characters. If a column expected to be numeric like ShoeSize accidentally contains stray text or non-numeric characters, R will coerce the entire column into a character type or factor. This breaks mathematical operations like mean() or cor(), resulting in errors or unexpected NA values.
+
+**Question 5:**
+
+head() only shows the first few rows of a dataset. Checking tail() is essential because import anomalies, trailing garbage text, corrupted formatting, or summary/total rows appended at the bottom of a CSV file often occur at the end of a file. head() alone would completely fail to catch these trailing file corruption issues
+
+**Question 7:** 
+
+Males typically exhibit higher mean values for both shoe size and height compared to females.
+
+Gender acts as a confounding or clustering factor because males onaverage have both larger shoe sizes and greater heights than females, combining them can create an exaggerated correlation overall. Analyzing the relationship within each gender group helps determine if the correlation holds true independently of sexual dimorphism in body proportions
+
