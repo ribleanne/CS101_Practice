@@ -1,0 +1,123 @@
+---
+title: "R Lab: Basic Operations - sort(), rank(), and order()"
+author: "Richel Anne Sumalde"
+date: "2026-11-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+scores <- c(Ana = 78, Ben = 92, Cid = 85, Dex = 92, Eli = 67, Fay = 88, Gio = 74)
+scores
+
+sort(scores)
+sort(scores, decreasing = TRUE)
+
+sort(scores)
+
+subjects <- c("Science", "Math", "English", "Filipino", "PE")
+incomplete <- c(85, NA, 90, 70, NA, 95)
+sort(subjects)
+
+sort(incomplete)
+sort(incomplete, na.last = TRUE)
+
+order(scores)
+
+scores[order(scores)]
+
+students <- data.frame(
+  name = c("Ana", "Ben", "Cid", "Dex", "Eli", "Fay", "Gio"),
+  score = c(78, 92, 85, 92, 67, 88, 74),
+  section = c("A", "B", "A", "B", "A", "B", "A")
+)
+students
+
+students[order(students$score), ]
+
+students[order(students$score, decreasing = TRUE), ]
+
+rank(scores)
+
+sales <- data.frame(
+  employee = c("Rey", "Sam", "Tin", "Uma", "Val"),
+  units_sold = c(120, 145, 145, 98, 130)
+)
+
+sales$rank <- rank(-sales$units_sold, ties.method = "min") 
+sales
+
+sales <- sales[order(sales$units_sold, decreasing = TRUE), ]
+sales
+
+```
+
+**Question 1:** 
+
+f. By default, sort() removes all NA values from the vector. When we use na.last = TRUE, R keeps the missing values and places them at the very end of the sorted output.
+
+**Question 2:**
+
+~ The names remained attached to their original values
+
+~ Yes, because scores were created as a named vector, R keeps the element names attached to their respective values when sorting. If names did not follow their values, sorting would misalign student identities with their actual performance. For example, the top score of 92 might get assigned to the wrong student, leading to incorrect grading or inaccurate reporting of top performers.
+
+**Question 3:** 
+
+It is dangerous because sort() hides missing data without warning. You might report a value as the "lowest score" when in reality, some students haven't submitted their work or the true lowest score might be masked/missing. It creates a false impression that all data points were validly recorded.
+
+**Question 4: **
+
+● sort(scores) returns the actual sorted values, whereas order(scores) returns the position indices of the elements in ascending order
+
+● Yes, scores[order(scores)] produce the exact same result as sort(scores). This is because indexing scores by the ordered position indices extracts and arranges the elements in ascending order.
+
+**Question 5: **
+
+~ Output:
+   name score section
+5  Eli    67       A
+7  Gio    74       A
+1  Ana    78       A
+3  Cid    85       A
+6  Fay    88       B
+2  Ben    92       B
+4  Dex    92       B
+
+~Output: 
+  name score section
+2  Ben    92       B
+4  Dex    92       B
+6  Fay    88       B
+3  Cid    85       A
+1  Ana    78       A
+7  Gio    74       A
+5  Eli    67       A
+
+**Question 6:**
+
+order(scores) returns a list of row/index numbers showing where each value originally was located in the vector. On its own, it just looks like a sequence of position numbers. It only becomes useful when used inside square brackets [ ] to rearrange vectors or data frame rows based on those positions.
+
+**Questions 7:**
+
+● sort() works on single vectors/columns, not entire 2D tables or data frames. If you run sort(students$score), it gives you a sorted list of scores, but it doesn't rearrange the corresponding name and section rows along with them.
+
+● order() gives the row positions required to sort one column, which can then be applied across all rows of the entire data frame using df[order_indices, ]. This keeps all columns aligned properly.
+
+ 
+**Question 8:**
+
+Both Ben and Dex received a rank of 6.5.
+
+By default, R uses ties.method = "average". Since 92 is tied for the 6th and 7th positions in ascending order, R takes the average of positions 6 and 7.
+
+
+**Question 9:**
+
+● No, order() gives the positional index order for sorting rows, but it does not generate ordinal numerical rank values for each individual item
+
+● order() returns position indices to rearrange data, whereas rank() calculates positional standing for each element relative to the group, assigning fractional or identical ranks for tied values, order() cannot handle tie or assign standings directly to individual rows
+
