@@ -1,0 +1,125 @@
+---
+title: 'Lab Activity: Data Structures — Matrix and Array in R'
+author: "Richel Anne Sumalde"
+date: "2026-11-04"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+m1 <- matrix(1:9, nrow = 3, ncol = 3)
+m1
+
+m2 <- matrix(1:9, nrow = 3, ncol = 3, byrow = TRUE)
+m2
+
+scores <- matrix(c(88, 92, 79, 95, 84, 90), nrow = 2, ncol = 3, byrow = TRUE)
+rownames(scores) <- c("Quiz1", "Quiz2")
+colnames(scores) <- c("Ana", "Ben", "Cid")
+scores
+
+scores[1, 2]
+scores[1, ]
+scores[, "Ben"]
+scores[scores >= 90]
+
+dim(scores)
+nrow(scores)
+ncol(scores)
+
+scores_t <- t(scores)
+print(scores_t)
+dim(scores_t)
+dim(scores)
+
+a <- matrix(1:4, nrow = 2)
+b <- matrix(5:8, nrow = 2)
+
+a + b
+a * b
+a %*% b
+
+scores_v2 <- cbind(scores, Dex = c(85, 91))
+scores_v2
+
+scores_v3 <- rbind(scores, Quiz3 = c(80, 88, 93))
+scores_v3
+
+arr <- array(1:12, dim = c(2, 3, 2))
+arr
+
+arr[1, 2, 2]
+arr[,, 1]
+
+dim(arr)
+class_a <- matrix(c(85, 90, 78, 88, 92, 80), nrow = 2, byrow = TRUE,
+                  dimnames = list(c("Quiz1", "Quiz2"), c("Ana", "Ben", "Cid")))
+
+class_b <- matrix(c(91, 84, 89, 93, 87, 95), nrow = 2, byrow = TRUE,
+                  dimnames = list(c("Quiz1", "Quiz2"), c("Dan", "Eve", "Fay")))
+
+all_students <- rbind(class_a, class_b)
+all_students
+
+rowMeans(all_students)
+
+```
+
+#ANSWERS
+
+**QUESTION 1:**
+
+R fills a matrix column by column, placing the first elements down the first column before moving to the second. When byrow = TRUE is specified, R fills the matrix row by row.
+
+**QUESTION 2:**
+
+Running this code generates a warning. R still creates a matrix by recycling the first element to fill the final empty slot.
+
+**QUESTION 3:**
+
+Running class() on either result returns "numeric", meaning R automatically downgrades the single row or column from a 2D matrix into a 1D vector. R does this because a single row or sequence of elements behaves more simply as a vector in mathematical operations saving memory and avoiding unnecessary 2D.
+
+**QUESTION 4:**
+
+Logical condition subsetting evaluates every single element across the entire matrix independently, returning an unindexed 1D vector of matching value rather than structured rows and columns, which causes both the 2D dimensions and the row/column names to be dropped.
+
+**QUESTION 5:**
+
+Element-wise multiplication simply multiplies each individual cell in matrix a by the corresponding cell in matrix b directly. True matrix multiplication performs standard linear algebra operations, multiplying rows by columns to compute new combined values.
+
+**QUESTION 6:**
+
+Swapping a matrix turning original rows into columns and original columns into rows. The row names must become the new column names, and the column names become the new row names to match it correctly.
+
+**QUESTION 7:**
+
+It throws an error because the number of rows in the vector does not match the number of rows in the matrix. cbind() and rbind() require matching dimensions so that every row or column has an equal and consistent length, maintaining the rectangular shape of the matrix.
+
+**QUESTION 8:**
+
+You would use rbind() when appending new observations or time periods. Rows typically represent individual records or timestamps, so adding sequential updates over time requires adding rows rather than columns.
+
+**QUESTION 9:**
+
+The first number represents the number of rows in each layer, the second number represents the number of columns in each layer, and the third number represents the total number of layers or matrices stacked together. 
+
+**QUESTION 10:**
+
+A retailer's weekly sales data tracked by stores (rows), product categories (columns) and different weeks of the year would fit a 3D array. A single 2D matrix would not be enough because you cannot simultaneously display multiple weeks without losing either the store or category structure unless you add a third dimension.
+
+**QUESTION 11:**
+
+I chose rbind() because both matrices share the exact same columns representing the same variables, but contain completely different rows representing new students. Since we are adding more rows of data under the same column, rbind()is the correct function to stack them.
+
+**QUESTION 12:**
+
+You would combine all 5 matrices into a single matrix by using rbind() with all five matrix names passed inside it. To check if the result is correct, you would run dim() on the final combined matrix to ensure that the total number of rows equals the sum of the students across all 5 classes, while the number of columns remains exactly 2.
+
+
+**CONCLUSION**
+
+A matrix is a two-dimensional data structure consisting of rows and columns that hold data of a single type, whereas an array generalizes this concept into three or more dimensions by stacking multiple matrices together like layers. While matrices are ideal for rectangular tabular data like spreadsheets or scores, arrays are necessary when managing multi-layered data that changes, such as tracking student scores across multiple classes over various semesters. In the real-world, cbind() is useful when adding a new variable or feature column like adding a new test score to an existing dataset, while rbind() is essential when appending new sequential observations or records over time like adding monthly sales reports.
+
