@@ -1,0 +1,81 @@
+---
+title: "Data Frames"
+author: "Richel Anne Sumalde"
+date: "2026-11-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+Respondent <- 1:20
+Sex <- c(2, 2, 1, 2, 2, 2, 2, 1, 1, 2, 1, 2, 1, 2, 2, 2, 2, 2, 1, 2)
+FathersOccupation <- c(1, 3, 3, 3, 1, 2, 3, 1, 1, 1, 3, 2, 1, 3, 3, 1, 3, 1, 2, 1)
+PersonsAtHome <- c(5, 7, 3, 8, 5, 2, 6, 7, 4, 4, 7, 5, 4, 7, 8, 8, 3, 11, 7, 6)
+SiblingsAtSchool <- c(6, 4, 4, 1, 2, 1, 5, 5, 1, 2, 3, 2, 5, 5, 1, 1, 2, 5, 3, 2)
+TypesOfHouses <- c(1, 2, 3, 1, 1, 3, 3, 1, 2, 3, 2, 3, 2, 2, 3, 3, 3, 3, 3, 2)
+
+length(Respondent)
+length(Sex)
+length(FathersOccupation)
+length(PersonsAtHome)
+length(SiblingsAtSchool)
+length(TypesOfHouses)
+
+survey <- data.frame(
+  Respondent = Respondent,
+  Sex = Sex,
+  FathersOccupation = FathersOccupation,
+  PersonsAtHome = PersonsAtHome,
+  SiblingsAtSchool = SiblingsAtSchool,
+  TypesOfHouses = TypesOfHouses
+)
+
+print(survey)
+
+str(survey)
+dim(survey)
+
+survey$Sex <- factor(survey$Sex, levels = c(1, 2), labels = c("Male", "Female"))
+survey$FathersOccupation <- factor(survey$FathersOccupation, levels = c(1, 2, 3), labels = c("Farmer", "Driver", "Others"))
+survey$TypesOfHouses <- factor(survey$TypesOfHouses, levels = c(1, 2, 3), labels = c("Wood", "Semi-Concrete", "Concrete"))
+
+sapply(survey, function(x) if(is.numeric(x)) mean(x) else NA)
+
+survey[1:5, ]
+
+types_houses <- survey$TypesOfHouses
+
+subset(survey, Sex == "Male" & FathersOccupation == "Farmer")
+
+subset(survey, Sex == "Female" & SiblingsAtSchool >= 5)
+
+sum(survey$Sex == 1) # or nrow(subset(survey, Sex == 1))
+
+summary(survey)
+```
+*Part A - Creating Data Frames*
+
+b. The dataset contains 20 rows for individual respondents and 6 columns for variables.
+
+e. The output displays a subset of the data frame showing only the first five rows across all six columns allowing to inspect the initial records of the survey.
+
+*Question 2:*
+This check is necessary because a data frame in R requires every column vector to have an identical number of rows. Since each row corresponds to a unique respondent across all questions, a mismatch in vector lengths would break the alignment, resulting in an error or misaligned data where responses do not match the correct individual.
+
+*Question 3:*
+Sex, FathersOccupation, and TypesOfHouses are nominal data represented by arbitrary numeric labels, while PersonsAtHome and SiblingsAtSchool are actual counts. Averaging Sex is misleading as it produces meaningless fractions that do not reflect valid categories.
+
+*Question 4:*
+Someone unfamiliar with the legend might misinterpret the output numbers as literal quantities or scores rather than arbitrary codes representing categories. This illustrates that raw numeric codes lack semantic context, making data prone to misinterpretation and errors before proper descriptive factor labels are applied.
+
+*Question 5:*
+Out of 20 respondents, there are 6 males, leading to low confidence in generalizing observed patterns to a larger population due to high sampling variability and insufficient statistical power or diversity.
+
+*Question 6:*
+R handles these columns as numeric values due to their initial import as plain numbers, lacking awareness of their real-world context. This distinction between data storage format and data semantics stresses the need for analysts to actively convert categorical variables into factors.
+
+*Question 7:*
+The mean of PersonsAtHome is a valid mathematical average representing the number of people in a household. However, the mean of Sex, being a categorical variable with arbitrary numerical codes, lacks logical or interpretable value.
